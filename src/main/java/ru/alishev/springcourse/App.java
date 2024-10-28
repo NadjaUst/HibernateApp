@@ -22,62 +22,19 @@ public class App {
         try {
             session.beginTransaction();
 
-            Person newPerson = new Person("Tom Hibernate", 50);
-            Item newItem = new Item("Apple Hibernate", newPerson);
-            newPerson.setItems(new ArrayList<>(Collections.singletonList(newItem)));
+            Person newPerson = new Person("Test cascading 3", 30);
+            newPerson.addItem(new Item("Test cascading item 10"));
+            newPerson.addItem(new Item("Test cascading item 20"));
+            newPerson.addItem(new Item("Test cascading item 30"));
 
             session.save(newPerson);
-            session.save(newItem);
 
             session.getTransaction().commit();
         } finally {
             sessionFactory.close();
         }
 
-        //adding item
-/*        try {
-            session.beginTransaction();
 
-            Person person = session.get(Person.class, 2);
-            Item newItem = new Item("MacBook", person);
-            person.getItems().add(newItem); // updating cash hibernate
-            session.save(newItem);
-
-            session.getTransaction().commit();
-        } finally {
-            sessionFactory.close();
-        }*/
-
-       //get person from item
- /*        try {
-            session.beginTransaction();
-
-            Item item = session.get(Item.class, 5);
-            System.out.println(item);
-            Person person = item.getOwner();
-            System.out.println(person);
-
-            session.getTransaction().commit();
-
-
-        } finally {
-            sessionFactory.close();
-        }*/
-
-        //get person`s items
-/*        try {
-            session.beginTransaction();
-
-            Person person = session.get(Person.class, 3);
-            System.out.println(person);
-            person.getItems().forEach(System.out::println);
-
-            session.getTransaction().commit();
-
-
-        } finally {
-            sessionFactory.close();
-        }*/
     }
 }
 
